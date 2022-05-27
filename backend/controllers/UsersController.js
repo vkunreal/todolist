@@ -1,4 +1,5 @@
 const UserServices = require("../services/UsersServices.js");
+const bcrypt = require("bcryptjs");
 
 class UsersController {
   // get users
@@ -8,19 +9,16 @@ class UsersController {
   }
 
   // get user
-  async getUser(req, res) {
+  async getUserById(req, res) {
     const user = await UserServices.getUser(req.params.id);
     res.status(200).json(user);
   }
 
   // create new user
   async createUser(req, res) {
-    const body = req.body;
-    const user = await UserServices.createUser(
-      body.name,
-      body.email,
-      body.password
-    );
+    const { name, email, password } = req.body;
+    const password_hash = bcrypt.hashSync(password, 7);
+    const user = await UserServices.createUser(name, email, password_hash);
     res.status(201).json(user);
   }
 }
