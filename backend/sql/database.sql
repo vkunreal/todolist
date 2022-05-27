@@ -9,7 +9,7 @@ DROP TABLE IF EXISTS users;
 CREATE TABLE users (
 	id SERIAL PRIMARY KEY, 
     `name` VARCHAR(50) NOT NULL,
-    email VARCHAR(50) NOT NULL,
+    email VARCHAR(50) NOT NULL UNIQUE,
     password_hash VARCHAR(150) NOT NULL,
     is_deleted BIT DEFAULT 0
 );
