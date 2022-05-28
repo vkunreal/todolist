@@ -4,6 +4,7 @@ const AuthController = require("../controllers/AuthController.js");
 
 const authRouter = new Router();
 
+// login
 authRouter.post(
   "/login",
   [
@@ -15,6 +16,7 @@ authRouter.post(
   AuthController.login
 );
 
+// registration
 authRouter.post(
   "/registration",
   [

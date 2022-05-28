@@ -1,79 +1,92 @@
-const conn = require("../db.js");
+const { connection, request } = require("../db.js");
+
+/**
+ * User {
+ *  id: number;
+ *  name: string;
+ *  email: string;
+ *  password_hash: string;
+ *  is_deleted: Buffer (0/1);
+ * }
+ */
 
 class UserServices {
   // creates the request to database for take users
   async getUsers() {
-    let users;
-
-    await conn
-      .query("SELECT * FROM users")
-      .then((results) => {
-        users = results[0];
-      })
-      .catch((e) => console.error(e));
-
-    return users;
+    return await request("SELECT * FROM users");
   }
 
-  // creates the request to database for take one user
+  /**
+   * get user from database by id
+   *
+   * @param {string} id
+   * @return {User}
+   */
   async getUserById(id) {
-    let user;
-
-    await conn
-      .query(`SELECT * FROM users WHERE id = ${id}`)
-      .then((results) => {
-        user = results[0];
-      })
-      .catch((e) => console.error(err));
-
-    return user;
+    const reqFunc = (results) => results[0][0];
+    return await request(`SELECT * FROM users WHERE id = ${id}`, reqFunc);
   }
 
-  // creates the request to database for create new user
+  /**
+   * creates the request to database for create new user
+   *
+   * @param {string} name
+   * @param {string} email
+   * @param {string} password_hash
+   * @return {User}
+   */
   async createUser(name, email, password_hash) {
-    let user;
-
-    const request = `
+    const req = `
           INSERT INTO users(name, email, password_hash)
             VALUES
             ("${name}", "${email}", "${password_hash}");
       `;
 
-    await conn.query(request).catch((e) => console.error(e));
+    await connection.query(req).catch((e) => console.error(e));
 
-    await conn
-      .query(`SELECT * FROM users WHERE email = "${email}"`)
-      .then((results) => (user = results[0]))
-      .catch(console.error);
-
-    return user;
+    const reqFunc = (results) => results[0][0];
+    return await request(
+      `SELECT * FROM users WHERE email = "${email}"`,
+      reqFunc
+    );
   }
 
-  // get user from database by email
+  /**
+   * get user from database by email
+   *
+   * @param {string} email
+   * @return {User}
+   */
   async getUserByEmail(email) {
-    let user;
-
-    await conn
-      .query(`SELECT * FROM users WHERE email = "${email}"`)
-      .then((results) => {
-        user = results[0][0];
-      })
-      .catch((e) => console.error(e));
-
-    return user;
+    const reqFunc = (results) => results[0][0];
+    return await request(
+      `SELECT * FROM users WHERE email = "${email}"`,
+      reqFunc
+    );
   }
 
-  // check user in database by email
+  /**
+   * heck user in database by email
+   *
+   * @param {string} email
+   * @return {boolean}
+   */
   async checkUserByEmail(email) {
-    let isUserHas;
+    const reqFunc = (results) => results[0][0]["count"];
+    return await request(
+      `SELECT count(id) as count FROM users WHERE email="${email}"`,
+      reqFunc
+    );
+  }
 
-    await conn
-      .query(`SELECT count(id) as count FROM users WHERE email="${email}"`)
-      .then((results) => results[0][0]["count"])
-      .then((result) => (isUserHas = !!result))
-      .catch((e) => console.error(e));
-
-    return isUserHas;
+  /**
+   * heck user in database by email
+   *
+   * @param {string} id
+   * @return {Request Data}
+   */
+  async deleteUserById(id) {
+    return await request(`DELETE FROM users WHERE id = "${id}"`);
   }
 }
 
