@@ -14,6 +14,45 @@ CREATE TABLE users (
     is_deleted BIT DEFAULT 0
 );
 
+-- profiles
+DROP TABLE IF EXISTS `profiles`;
+CREATE TABLE `profiles` (
+	user_id SERIAL PRIMARY KEY,
+    created_at DATETIME NOT NULL,
+    photo_id VARCHAR(100),
+    
+    FOREIGN KEY (user_id) REFERENCES users(id) ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+-- projects
+DROP TABLE IF EXISTS projects;
+CREATE TABLE projects (
+	id SERIAL PRIMARY KEY,
+    `name` VARCHAR(100) NOT NULL,
+    `description` VARCHAR(500)
+);
+
+-- list of todo cards
+DROP TABLE IF EXISTS todo_cards;
+CREATE TABLE todo_cards (
+	id SERIAL PRIMARY KEY,
+    `name` VARCHAR(100) NOT NULL,
+    `description` VARCHAR(500),
+    project_id BIGINT UNSIGNED NOT NULL,
+    
+    FOREIGN KEY (project_id) REFERENCES projects(id) ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+-- projects - users
+DROP TABLE IF EXISTS projects_users;
+CREATE TABLE projects_users (
+	project_id BIGINT UNSIGNED NOT NULL,
+    user_id BIGINT UNSIGNED NOT NULL,
+    
+    FOREIGN KEY (project_id) REFERENCES projects(id) ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
 /* Insert information */
 
 INSERT INTO users(name, email, password_hash)
@@ -23,3 +62,7 @@ VALUES
 ('Unique', 'rupert55@example.org', "asdmv493jfidsamvg43qf"),
 ('Norene', 'rebekah29@example.net', "igad932gdfsgii43wg"),
 ('Frederick', 'von.bridget@example.net', "reisgmvdif390gwidfsb");
+
+INSERT INTO projects(name, description)
+VALUES
+("First Project", "It's my first project");
