@@ -65,4 +65,10 @@ VALUES
 
 INSERT INTO projects(name, description)
 VALUES
+("First Project", "It's my first project"),
+("First Project", "It's my first project"),
+("First Project", "It's my first project"),
 ("First Project", "It's my first project");
+
+DELETE FROM projects
+WHERE id = 2;

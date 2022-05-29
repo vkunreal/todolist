@@ -1,6 +1,6 @@
 const mysql = require("mysql2");
 
-const conn = mysql
+const connection = mysql
   .createConnection({
     host: "localhost",
     user: process.env.user,
@@ -9,4 +9,17 @@ const conn = mysql
   })
   .promise();
 
-module.exports = conn;
+const defaultRequestFunc = (results) => results[0];
+
+const request = async (sqlRequest, func = defaultRequestFunc) => {
+  let data;
+
+  await connection
+    .query(sqlRequest)
+    .then((results) => (data = func(results)))
+    .catch((e) => console.error(e));
+
+  return data;
+};
+
+module.exports = { connection, request };

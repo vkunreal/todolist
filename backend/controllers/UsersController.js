@@ -10,7 +10,7 @@ class UsersController {
 
   // get user
   async getUserById(req, res) {
-    const user = await UserServices.getUser(req.params.id);
+    const user = await UserServices.getUserById(req.params.id);
     res.status(200).json(user);
   }
 
@@ -20,6 +20,14 @@ class UsersController {
     const password_hash = bcrypt.hashSync(password, 7);
     const user = await UserServices.createUser(name, email, password_hash);
     res.status(201).json(user);
+  }
+
+  // delete user
+  async deleteUser(req, res) {
+    const id = req.params.id;
+    const data = await UserServices.deleteUserById(id);
+
+    res.status(200).json(data);
   }
 }
 
