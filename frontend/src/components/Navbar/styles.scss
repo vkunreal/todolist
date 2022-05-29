@@ -1,0 +1,13 @@
+.navbar {
+  background: #24292f;
+
+  .authBtns {
+    display: flex;
+    gap: 10px;
+
+    & a {
+      color: #fff;
+      text-decoration: none;
+    }
+  }
+}
