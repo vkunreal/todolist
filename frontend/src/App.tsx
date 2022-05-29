@@ -1,18 +1,13 @@
-import { useEffect } from "react";
+import { Provider } from "react-redux";
 import { RoutesComp } from "./views/Routes";
+import { store } from "./store";
 import "./App.scss";
 
-const App = () => {
-  useEffect(() => {
-    fetch("/api/projects")
-      .then((data) => data.json())
-      .then((data) => console.log(data));
-  }, []);
-
+const App: React.FC = () => {
   return (
-    <div>
+    <Provider store={store}>
       <RoutesComp />
-    </div>
+    </Provider>
   );
 };
 

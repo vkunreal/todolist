@@ -1,8 +1,5 @@
 import { Registration } from "../../components/Registration";
-
-interface IAuthProps {
-  type: string;
-}
+import { IAuthProps } from "./interfaces";
 
 export const Authtorization: React.FC<IAuthProps> = ({ type }) => {
   return (
