@@ -9,9 +9,14 @@ export interface IUserState {
   isAuth: boolean;
 }
 
-export interface ISetUser {
+interface ISetUser {
   type: string;
   payload: IUser;
 }
 
-export type Action = ISetUser;
+interface IDeleteUser {
+  type: string;
+  payload: null;
+}
+
+export type Action = ISetUser | IDeleteUser;
