@@ -18,7 +18,7 @@ CREATE TABLE users (
 DROP TABLE IF EXISTS `profiles`;
 CREATE TABLE `profiles` (
 	user_id SERIAL PRIMARY KEY,
-    created_at DATETIME NOT NULL,
+    created_at VARCHAR(50) NOT NULL,
     photo_id VARCHAR(100),
     
     FOREIGN KEY (user_id) REFERENCES users(id) ON UPDATE CASCADE ON DELETE CASCADE
@@ -70,5 +70,10 @@ VALUES
 ("First Project", "It's my first project"),
 ("First Project", "It's my first project");
 
-DELETE FROM projects
-WHERE id = 2;
+INSERT INTO profiles(user_id, created_at)
+VALUES
+(1, "2020-2-1"),
+(2, "2021-1-2"),
+(3, "2022-2-5"),
+(4, "2019-4-7"),
+(5, "2022-3-3");

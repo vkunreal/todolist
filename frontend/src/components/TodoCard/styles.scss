@@ -1,0 +1,21 @@
+.todoCard {
+  max-width: 450px;
+  padding: 10px;
+  padding-bottom: 50px;
+  border: 1px solid #ccc;
+  position: relative;
+
+  &-heading {
+    margin: 10px;
+  }
+
+  &-description {
+    margin: 0 10px;
+  }
+
+  & button {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+  }
+}

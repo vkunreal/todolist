@@ -1,4 +1,5 @@
 const { connection, request } = require("../db.js");
+const ProfilesServices = require("./ProfilesServices.js");
 
 /**
  * User {
@@ -36,19 +37,23 @@ class UserServices {
    * @return {User}
    */
   async createUser(name, email, password_hash) {
-    const req = `
+    const reqUser = `
           INSERT INTO users(name, email, password_hash)
             VALUES
             ("${name}", "${email}", "${password_hash}");
       `;
 
-    await connection.query(req).catch((e) => console.error(e));
+    await connection.query(reqUser).catch((e) => console.error(e));
 
     const reqFunc = (results) => results[0][0];
-    return await request(
+    const user = await request(
       `SELECT * FROM users WHERE email = "${email}"`,
       reqFunc
     );
+
+    await ProfilesServices.createProfile(user.id);
+
+    return user;
   }
 
   /**
@@ -86,6 +91,7 @@ class UserServices {
    * @return {Request Data}
    */
   async deleteUserById(id) {
+    await request(`DELETE FROM profiles WHERE user_id = "${id}"`);
     return await request(`DELETE FROM users WHERE id = "${id}"`);
   }
 }

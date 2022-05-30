@@ -4,14 +4,19 @@ export interface IUser {
   name: string;
 }
 
-export interface IState {
+export interface IUserState {
   user: IUser | null;
   isAuth: boolean;
 }
 
-export interface ISetUser {
+interface ISetUser {
   type: string;
   payload: IUser;
 }
 
-export type Action = ISetUser;
+interface IDeleteUser {
+  type: string;
+  payload: null;
+}
+
+export type Action = ISetUser | IDeleteUser;

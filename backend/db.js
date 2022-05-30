@@ -14,10 +14,14 @@ const defaultRequestFunc = (results) => results[0];
 const request = async (sqlRequest, func = defaultRequestFunc) => {
   let data;
 
-  await connection
-    .query(sqlRequest)
-    .then((results) => (data = func(results)))
-    .catch((e) => console.error(e));
+  try {
+    await connection
+      .query(sqlRequest)
+      .then((results) => (data = func(results)))
+      .catch((e) => console.error(e));
+  } catch (e) {
+    console.error(e);
+  }
 
   return data;
 };
