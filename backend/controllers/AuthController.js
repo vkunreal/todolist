@@ -28,8 +28,14 @@ class AuthController {
     // Password check
     const checkPass = await bcrypt.compareSync(password, user.password_hash);
 
+    const response = {
+      id: user.id,
+      email: user.email,
+      name: user.name,
+    };
+
     if (checkPass) {
-      res.status(200).json(user);
+      res.status(200).json(response);
     } else {
       res.status(400).send("Uncorrected data");
     }
