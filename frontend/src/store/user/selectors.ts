@@ -1,5 +1,5 @@
-import { IState } from "./interfaces";
+import { IStore } from "./../interfaces";
 
-export const selectUser = (state: IState) => state.user;
+export const selectUser = (state: IStore) => state.user.user;
 
-export const selectAuth = (state: IState) => state.isAuth;
+export const selectAuth = (state: IStore) => state.user.isAuth;

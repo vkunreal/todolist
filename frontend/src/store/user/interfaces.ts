@@ -4,7 +4,7 @@ export interface IUser {
   name: string;
 }
 
-export interface IState {
+export interface IUserState {
   user: IUser | null;
   isAuth: boolean;
 }
