@@ -1,15 +1,15 @@
 import { UserActionsType } from "./actions";
-import { Action, IState } from "./interfaces";
+import { Action, IUserState } from "./interfaces";
 
-const initState: IState = {
+const initState: IUserState = {
   user: null,
   isAuth: false,
 };
 
 export const userReducer = (
-  state: IState = initState,
+  state: IUserState = initState,
   { type, payload }: Action
-): IState => {
+): IUserState => {
   switch (type) {
     case UserActionsType.SET_USER:
       return {
