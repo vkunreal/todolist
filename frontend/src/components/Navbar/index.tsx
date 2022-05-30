@@ -1,11 +1,12 @@
 import { AppBar, Box, Button, Toolbar, Typography } from "@mui/material";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { selectAuth } from "../../store/user/selectors";
+import { selectAuth, selectUser } from "../../store/user/selectors";
 import "./styles.scss";
 
 export const Navbar: React.FC = () => {
   const isAuth = useSelector(selectAuth);
+  const user = useSelector(selectUser);
   const navigate = useNavigate();
 
   const handleLogoClick = () => {
@@ -28,7 +29,7 @@ export const Navbar: React.FC = () => {
 
             {isAuth ? (
               <Button color="inherit" variant="outlined">
-                <Link to="/profile/3">Profile</Link>
+                <Link to={`/profile/${user?.id}`}>Profile</Link>
               </Button>
             ) : (
               <AuthBtns />
@@ -40,7 +41,7 @@ export const Navbar: React.FC = () => {
   );
 };
 
-const AuthBtns = () => {
+const AuthBtns: React.FC = () => {
   return (
     <div className="authBtns">
       <Button color="inherit" variant="outlined">

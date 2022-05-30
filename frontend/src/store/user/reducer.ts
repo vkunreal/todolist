@@ -18,6 +18,13 @@ export const userReducer = (
         isAuth: true,
       };
 
+    case UserActionsType.DELETE_USER:
+      return {
+        ...state,
+        user: null,
+        isAuth: false,
+      };
+
     default:
       return state;
   }

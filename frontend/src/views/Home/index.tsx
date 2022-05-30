@@ -1,7 +1,13 @@
+import { TodoCard } from "../../components/TodoCard";
+
 export const Home = () => {
   return (
     <div>
-      <h2>Home page</h2>
+      <TodoCard />
+      <TodoCard />
+      <TodoCard />
+      <TodoCard />
+      <TodoCard />
     </div>
   );
 };
