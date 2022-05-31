@@ -1,16 +1,23 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import { setUser } from "../../store/user/actions";
 import { IRegistrationProps } from "./interfaces";
 import { Button, TextField } from "@mui/material";
 import axios from "axios";
+import { selectAuth } from "../../store/user/selectors";
 
 export const Registration: React.FC<IRegistrationProps> = ({ type }) => {
-  const [login, setLogin] = useState("");
-  const [password, setPassword] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const isAuth = useSelector(selectAuth);
+
+  const [login, setLogin] = useState("");
+  const [password, setPassword] = useState("");
+
+  useEffect(() => {
+    if (isAuth) navigate("/home");
+  }, []);
 
   // changes login input
   const handleLoginChange = (e: React.ChangeEvent<HTMLInputElement>): void => {

@@ -28,9 +28,11 @@ export const Navbar: React.FC = () => {
             </Typography>
 
             {isAuth ? (
-              <Button color="inherit" variant="outlined">
-                <Link to={`/profile/${user?.id}`}>Profile</Link>
-              </Button>
+              <Link to={`/profile/${user?.id}`}>
+                <Button color="inherit" variant="outlined">
+                  Profile
+                </Button>
+              </Link>
             ) : (
               <AuthBtns />
             )}
@@ -44,13 +46,17 @@ export const Navbar: React.FC = () => {
 const AuthBtns: React.FC = () => {
   return (
     <div className="authBtns">
-      <Button color="inherit" variant="outlined">
-        <Link to="/auth/login">Login</Link>
-      </Button>
+      <Link to="/auth/login">
+        <Button color="inherit" variant="outlined">
+          Login
+        </Button>
+      </Link>
 
-      <Button color="inherit" variant="outlined">
-        <Link to="/auth/singup">Sing Up</Link>
-      </Button>
+      <Link to="/auth/singup">
+        <Button color="inherit" variant="outlined">
+          Sing Up
+        </Button>
+      </Link>
     </div>
   );
 };
