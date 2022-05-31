@@ -6,6 +6,11 @@ class ProjectsServices {
     return await request("SELECT * FROM projects");
   }
 
+  async getProjectsByUserId(id) {
+    const sqlReq = `SELECT * FROM projects WHERE id IN (SELECT project_id FROM projects_users WHERE user_id = "${id}")`;
+    return await request(sqlReq);
+  }
+
   /**
    * get one project from database by id
    *

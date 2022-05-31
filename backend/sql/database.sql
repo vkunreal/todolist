@@ -66,9 +66,20 @@ VALUES
 INSERT INTO projects(name, description)
 VALUES
 ("First Project", "It's my first project"),
-("First Project", "It's my first project"),
-("First Project", "It's my first project"),
-("First Project", "It's my first project");
+("Second Project", "It's my first project"),
+("Third Project", "It's my first project"),
+("Fourth Project", "It's my first project"),
+("Fifth Project", "It's my first project");
+
+INSERT INTO projects_users(project_id, user_id)
+VALUES
+(1, 1),
+(1, 2),
+(2, 1),
+(3, 3),
+(4, 4),
+(4, 5),
+(5, 5);
 
 INSERT INTO profiles(user_id, created_at)
 VALUES
