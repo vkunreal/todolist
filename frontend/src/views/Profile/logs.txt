@@ -1,0 +1,36 @@
+{/* <form>
+        <input
+          type="file"
+          ref={fileRef}
+          style={{ display: "none" }}
+          onChange={handleChangeInput}
+          accept="image/jpeg,image/png"
+        />
+
+        <Button variant="outlined" color="success" onClick={handleOpenFile}>
+          Open
+        </Button>
+
+        <Button variant="outlined" color="success" onClick={handleLoadImage}>
+          Send file
+        </Button>
+      </form> */}
+
+const handleChangeInput = (e: any) => {
+    const files: any[] = Array.from(e.target.files);
+    const reader = new FileReader();
+
+    reader.onload = (e: any) => setImage(e.currentTarget.result);
+    reader.readAsDataURL(files[0]);
+  };
+
+  const handleOpenFile = () => fileRef.current.click();
+
+  const handleLoadImage = async () => {
+    await axios.put("/api/profile/image", {
+      user_id: user?.id,
+      image,
+    });
+  };
+
+  const fileRef = useRef<any>(null);

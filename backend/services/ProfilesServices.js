@@ -24,6 +24,15 @@ class ProfilesServices {
     );
   }
 
+  // get profile image in datebase
+  async getProfileImageByUserId(user_id) {
+    const reqFunc = (results) => results[0][0];
+    return await request(
+      `SELECT image FROM profiles WHERE user_id = "${user_id}"`,
+      reqFunc
+    );
+  }
+
   /**
    * create profile in database by user id
    *
@@ -40,6 +49,18 @@ class ProfilesServices {
     await request(sqlReq);
 
     return await this.getProfileByUserId(user_id);
+  }
+
+  async putAvatarImage(user_id, image) {
+    const sqlReq = `UPDATE profiles SET image = "${image}" WHERE user_id = "${user_id}"`;
+
+    await request(sqlReq);
+
+    const reqFunc = (results) => results[0][0];
+    return await request(
+      `SELECT image FROM profiles WHERE user_id = "${user_id}"`,
+      reqFunc
+    );
   }
 
   /**

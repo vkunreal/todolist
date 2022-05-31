@@ -17,6 +17,14 @@ class ProfilesController {
     res.status(200).json(profile);
   }
 
+  async getProfileImage(req, res) {
+    const user_id = req.params.user_id;
+
+    const image = await ProfilesServices.getProfileImageByUserId(user_id);
+
+    res.status(200).json(image);
+  }
+
   // create new profile
   async createProfile(req, res) {
     const { user_id } = req.body;
@@ -24,6 +32,15 @@ class ProfilesController {
     const profile = await ProfilesServices.createProfile(user_id);
 
     res.status(201).json(profile);
+  }
+
+  // change avatar in profile
+  async putAvatarImage(req, res) {
+    const { user_id, image } = req.body;
+
+    const avatar = await ProfilesServices.putAvatarImage(user_id, image);
+
+    res.status(200).json(avatar);
   }
 
   // delete one profile
