@@ -8,6 +8,13 @@ class ProjectsController {
     res.status(200).json(projects);
   }
 
+  async getProjects(req, res) {
+    const user_id = req.params.user_id;
+    const projects = await ProjectsServices.getProjectsByUserId(user_id);
+
+    res.status(200).json(projects);
+  }
+
   // get one project
   async getProject(req, res) {
     const id = req.params.id;

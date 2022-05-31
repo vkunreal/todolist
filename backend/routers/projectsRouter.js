@@ -4,8 +4,9 @@ const ProjectsController = require("../controllers/ProjectsController.js");
 const projectsRouter = new Router();
 
 projectsRouter.get("/projects", ProjectsController.getProjects);
-projectsRouter.get("/projects/:id", ProjectsController.getProject);
+projectsRouter.get("/projects/:user_id", ProjectsController.getProjects);
+projectsRouter.get("/project/:id", ProjectsController.getProject);
 
-projectsRouter.delete("/projects/:id", ProjectsController.deleteProject);
+projectsRouter.delete("/project/:id", ProjectsController.deleteProject);
 
 module.exports = projectsRouter;
