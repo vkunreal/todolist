@@ -22,11 +22,7 @@ export const ProjectsList: React.FC = () => {
 
   // get projects
   useEffect(() => {
-    setTimeout(() => {
-      axios
-        .get(`/api/projects/${user?.id}`)
-        .then((res) => setProjects(res.data));
-    }, 2500);
+    axios.get(`/api/projects/${user?.id}`).then((res) => setProjects(res.data));
   }, []);
 
   // set pages count
