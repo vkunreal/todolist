@@ -1,11 +1,27 @@
-export const Project: React.FC = () => {
+import { Button } from "@mui/material";
+import { IProjectProps } from "./interfaces";
+import { getDate } from "./date";
+import "./styles.scss";
+
+export const Project: React.FC<IProjectProps> = ({
+  name,
+  description,
+  last_update,
+}) => {
   return (
-    <div>
-      <h1>Heading</h1>
+    <div className="project">
+      <div>
+        <h1 className="project-heading">{name}</h1>
 
-      <p>Description</p>
+        <p className="project-description">{description}</p>
+        <p className="project-lastUpdate">Updated {getDate(last_update)} ago</p>
+      </div>
 
-      <p>Updated 3 day(s) ago</p>
+      <div className="project-rightside">
+        <Button variant="outlined" color="error">
+          Delete
+        </Button>
+      </div>
     </div>
   );
 };

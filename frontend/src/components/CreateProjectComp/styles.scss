@@ -1,0 +1,38 @@
+.createProjectComp {
+  width: 30%;
+  display: flex;
+  padding-top: 150px;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+  margin-left: 200px;
+  border-right: 1px solid #ccc;
+
+  &-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+
+    &-bottom {
+      width: 90%;
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+
+  &-input {
+    width: 90%;
+  }
+
+  &-description {
+    width: 90%;
+    margin: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    font-size: 20px;
+    color: #9e9e9e;
+  }
+}
