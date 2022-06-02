@@ -1,0 +1,16 @@
+.project {
+  width: 100%;
+  border-bottom: 1px solid #ccc;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+
+  &-heading {
+    margin-bottom: 10px;
+  }
+
+  &-rightside {
+    display: flex;
+    align-items: flex-end;
+  }
+}

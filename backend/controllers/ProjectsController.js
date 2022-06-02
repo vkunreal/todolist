@@ -2,13 +2,13 @@ const ProjectsServices = require("../services/ProjectsServices");
 
 class ProjectsController {
   // get all projects
-  async getProjects(req, res) {
+  async getAllProjects(req, res) {
     const projects = await ProjectsServices.getProjects();
 
     res.status(200).json(projects);
   }
 
-  async getProjects(req, res) {
+  async getProjectsByUserId(req, res) {
     const user_id = req.params.user_id;
     const projects = await ProjectsServices.getProjectsByUserId(user_id);
 

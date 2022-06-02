@@ -29,7 +29,8 @@ DROP TABLE IF EXISTS projects;
 CREATE TABLE projects (
 	id SERIAL PRIMARY KEY,
     `name` VARCHAR(100) NOT NULL,
-    `description` VARCHAR(500)
+    `description` VARCHAR(500),
+    last_update BIGINT NOT NULL
 );
 
 -- list of todo cards
@@ -63,13 +64,13 @@ VALUES
 ('Norene', 'rebekah29@example.net', "igad932gdfsgii43wg"),
 ('Frederick', 'von.bridget@example.net', "reisgmvdif390gwidfsb");
 
-INSERT INTO projects(name, description)
+INSERT INTO projects(name, description, last_update)
 VALUES
-("First Project", "It's my first project"),
-("Second Project", "It's my first project"),
-("Third Project", "It's my first project"),
-("Fourth Project", "It's my first project"),
-("Fifth Project", "It's my first project");
+("First Project", "It's my first project", 1654170652465),
+("Second Project", "It's my first project", 1654170652465),
+("Third Project", "It's my first project", 1654170652465),
+("Fourth Project", "It's my first project", 1654170652465),
+("Fifth Project", "It's my first project", 1654170652465);
 
 INSERT INTO projects_users(project_id, user_id)
 VALUES
