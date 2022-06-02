@@ -1,0 +1,17 @@
+.projectsList {
+  width: 70%;
+  height: 800px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  &-heading {
+    margin: 20px;
+    margin-left: 40px;
+  }
+
+  &-pagination {
+    margin: 20px 0;
+  }
+}
