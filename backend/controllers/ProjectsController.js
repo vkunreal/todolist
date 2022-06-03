@@ -26,7 +26,11 @@ class ProjectsController {
   // delete one project
   async deleteProject(req, res) {
     const id = req.params.id;
-    const data = await ProjectsServices.deleteProjectById(id);
+    await ProjectsServices.deleteProjectById(id);
+
+    const data = {
+      message: `Project (index ${id}) deleted`,
+    };
 
     res.status(200).json(data);
   }

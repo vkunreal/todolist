@@ -28,7 +28,7 @@ class ProjectsServices {
    * @return {Request Data}
    */
   async deleteProjectById(id) {
-    return await request(`DELETE FROM projects WHERE id = "${id}"`);
+    await request(`DELETE FROM projects WHERE id = "${id}"`);
   }
 }
 
