@@ -20,20 +20,25 @@ export const ProjectsList: React.FC = () => {
   // user
   const user = useSelector(selectUser);
 
-  // get projects
-  useEffect(() => {
+  const getProjects = () => {
     axios.get(`/api/projects/${user?.id}`).then((res) => setProjects(res.data));
-  }, []);
+  };
 
-  // set pages count
+  // get projects
+  useEffect(getProjects, []);
+
+  // set pages count and projects, which will be displayed
   useEffect(() => {
     setCountPages(Math.ceil(projects.length / 5));
+    setPageProjects(projects.slice((page - 1) * 5, page * 5));
   }, [projects]);
 
-  // set projects, which will be displayed
   useEffect(() => {
     setPageProjects(projects.slice((page - 1) * 5, page * 5));
-  });
+  }, [page]);
+
+  const handleDelete = (id: number) =>
+    axios.delete(`/api/project/${id}`).then(getProjects);
 
   // change page
   const handlePaginationChange = (
@@ -54,6 +59,8 @@ export const ProjectsList: React.FC = () => {
               name={proj.name}
               description={proj.description}
               last_update={proj.last_update}
+              onDelete={handleDelete}
+              id={proj.id}
               key={proj.id}
             />
           ))}

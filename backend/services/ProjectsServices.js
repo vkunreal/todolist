@@ -21,6 +21,26 @@ class ProjectsServices {
     return await request(`SELECT * FROM projects WHERE id = "${id}"`);
   }
 
+  async addProjectByUserId(proj, user_id) {
+    const lastUpdate = new Date().getTime();
+    const projectId = Math.round(Math.random() * 100000000);
+    const reqProject = `
+      INSERT INTO projects (id, name, description, last_update)
+      VALUES
+      ("${projectId}", "${proj.name}", "${proj.description}", "${lastUpdate}");
+    `;
+    const reqUserProject = `
+      INSERT INTO projects_users (project_id, user_id)
+      VALUES
+      ("${projectId}", "${user_id}");
+    `;
+    const reqGetProject = `SELECT * FROM projects WHERE id = "${projectId}"`;
+
+    await request(reqProject);
+    await request(reqUserProject);
+    return await request(reqGetProject);
+  }
+
   /**
    * delete one project from database by id
    *
@@ -28,7 +48,7 @@ class ProjectsServices {
    * @return {Request Data}
    */
   async deleteProjectById(id) {
-    return await request(`DELETE FROM projects WHERE id = "${id}"`);
+    await request(`DELETE FROM projects WHERE id = "${id}"`);
   }
 }
 
