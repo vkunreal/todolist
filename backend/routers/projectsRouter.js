@@ -10,6 +10,8 @@ projectsRouter.get(
 );
 projectsRouter.get("/project/:id", ProjectsController.getProject);
 
+projectsRouter.post("/project", ProjectsController.addProject);
+
 projectsRouter.delete("/project/:id", ProjectsController.deleteProject);
 
 module.exports = projectsRouter;

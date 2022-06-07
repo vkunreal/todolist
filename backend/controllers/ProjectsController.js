@@ -23,6 +23,17 @@ class ProjectsController {
     res.status(200).json(project);
   }
 
+  async addProject(req, res) {
+    const body = req.body;
+
+    const project = await ProjectsServices.addProjectByUserId(
+      body.project,
+      body.user_id
+    );
+
+    res.status(201).json(project);
+  }
+
   // delete one project
   async deleteProject(req, res) {
     const id = req.params.id;
