@@ -1,31 +1,31 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Pagination } from "@mui/material";
-import axios from "axios";
 
-import { selectUser } from "../../store/user/selectors";
 import { Project } from "../Project";
 import { IProject } from "./interfaces";
+import { selectProjects } from "../../store/projects/selectors";
+import {
+  deleteProjectDB,
+  updateProjectsDB,
+} from "../../store/projects/actions";
 import "./styles.scss";
 
 export const ProjectsList: React.FC = () => {
   // projects
-  const [projects, setProjects] = useState<IProject[]>([]);
+  const projects = useSelector(selectProjects);
   const [pageProjects, setPageProjects] = useState<IProject[]>([]);
 
   // pages
   const [page, setPage] = useState(1);
   const [countPages, setCountPages] = useState(0);
 
-  // user
-  const user = useSelector(selectUser);
-
-  const getProjects = () => {
-    axios.get(`/api/projects/${user?.id}`).then((res) => setProjects(res.data));
-  };
+  const dispatch = useDispatch();
 
   // get projects
-  useEffect(getProjects, []);
+  useEffect(() => {
+    dispatch(updateProjectsDB());
+  }, []);
 
   // set pages count and projects, which will be displayed
   useEffect(() => {
@@ -37,8 +37,7 @@ export const ProjectsList: React.FC = () => {
     setPageProjects(projects.slice((page - 1) * 5, page * 5));
   }, [page]);
 
-  const handleDelete = (id: number) =>
-    axios.delete(`/api/project/${id}`).then(getProjects);
+  const handleDelete = (id: number) => dispatch(deleteProjectDB(id));
 
   // change page
   const handlePaginationChange = (

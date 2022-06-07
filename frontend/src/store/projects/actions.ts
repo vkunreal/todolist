@@ -23,24 +23,31 @@ const deleteProject = (id: number) => ({
   payload: id,
 });
 
-export const updateProjectDB: any =
-  () => (dispatch: Dispatch, getState: () => IStore) => {
+export const updateProjectsDB: any =
+  () => async (dispatch: Dispatch, getState: () => IStore) => {
     const user_id = getState().user.user?.id;
 
-    axios
+    await axios
       .get(`/api/projects/${user_id}`)
       .then((res) => dispatch(setProjects(res.data)));
   };
 
 export const addProjectDB: any =
   (name: string, description: string) =>
-  (dispatch: Dispatch, getState: () => IStore) => {
+  async (dispatch: Dispatch, getState: () => IStore) => {
     const user_id = getState().user.user?.id;
 
-    axios
+    await axios
       .post("/api/project", {
         user_id,
         project: { name, description },
       })
-      .then((res) => dispatch(addProject(res.data)));
+      .then((res) => dispatch(addProject(res.data[0])));
+  };
+
+export const deleteProjectDB: any =
+  (id: number) => async (dispatch: Dispatch) => {
+    await axios
+      .delete(`/api/project/${id}`)
+      .then(() => dispatch(deleteProject(id)));
   };
