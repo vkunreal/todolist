@@ -31,3 +31,16 @@ export const updateProjectDB: any =
       .get(`/api/projects/${user_id}`)
       .then((res) => dispatch(setProjects(res.data)));
   };
+
+export const addProjectDB: any =
+  (name: string, description: string) =>
+  (dispatch: Dispatch, getState: () => IStore) => {
+    const user_id = getState().user.user?.id;
+
+    axios
+      .post("/api/project", {
+        user_id,
+        project: { name, description },
+      })
+      .then((res) => dispatch(addProject(res.data)));
+  };
