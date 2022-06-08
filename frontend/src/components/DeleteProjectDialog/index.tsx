@@ -3,10 +3,11 @@ import { IDeleteProjectDialogProps } from "./interfaces";
 
 export const DeleteProjectDialog: React.FC<IDeleteProjectDialogProps> = ({
   isOpen,
+  onClose,
   onDelete,
 }) => {
   return (
-    <Dialog open={isOpen}>
+    <Dialog open={isOpen} onClose={onClose}>
       <DialogTitle>DELETE PROJECT</DialogTitle>
 
       <DialogContent>

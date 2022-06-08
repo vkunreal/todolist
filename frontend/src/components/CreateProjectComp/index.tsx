@@ -7,6 +7,7 @@ import "./styles.scss";
 export const CreateProjectComp: React.FC = () => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
+  const [error, setError] = useState("");
 
   const dispatch = useDispatch();
 
@@ -16,8 +17,15 @@ export const CreateProjectComp: React.FC = () => {
     setDescription(e.target.value);
 
   const handleCreateProject = () => {
+    if (!name.trim()) {
+      return setError("Name is empty");
+    } else if (!description.trim()) {
+      return setError("Description is empty");
+    }
+
     setName("");
     setDescription("");
+    setError("");
 
     dispatch(addProjectDB(name, description));
   };
@@ -37,7 +45,7 @@ export const CreateProjectComp: React.FC = () => {
 
         <TextField
           className="createProjectComp-input"
-          placeholder="Name"
+          placeholder="Description"
           autoComplete="off"
           value={description}
           onChange={handleChangeDescription}
@@ -54,6 +62,8 @@ export const CreateProjectComp: React.FC = () => {
             Create
           </Button>
         </div>
+
+        <p className="error">{error}</p>
 
         <div className="createProjectComp-description">
           <p>

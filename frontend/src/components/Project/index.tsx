@@ -16,6 +16,8 @@ export const Project: React.FC<IProjectProps> = ({
   const projectRef = useRef<HTMLDivElement>(null);
   const [open, setOpen] = useState(false);
 
+  const handleClose = () => setOpen(false);
+
   const handleDelete = () => {
     const className = projectRef.current?.getAttribute("class");
 
@@ -46,7 +48,11 @@ export const Project: React.FC<IProjectProps> = ({
         </Button>
       </div>
 
-      <DeleteProjectDialog isOpen={open} onDelete={handleDelete} />
+      <DeleteProjectDialog
+        isOpen={open}
+        onClose={handleClose}
+        onDelete={handleDelete}
+      />
     </div>
   );
 };
