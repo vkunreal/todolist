@@ -1,3 +1,4 @@
+import { profileReducer } from "./profile/reducer";
 import { applyMiddleware, combineReducers, createStore } from "redux";
 import { persistStore, persistReducer } from "redux-persist";
 import thunk from "redux-thunk";
@@ -15,6 +16,7 @@ const persistConfig = {
 const rootReducer = combineReducers({
   user: userReducer,
   projects: projectsReducer,
+  profile: profileReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

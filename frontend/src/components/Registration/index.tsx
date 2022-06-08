@@ -4,8 +4,9 @@ import { useNavigate } from "react-router";
 import { setUser } from "../../store/user/actions";
 import { IRegistrationProps } from "./interfaces";
 import { Button, TextField } from "@mui/material";
-import axios from "axios";
 import { selectAuth } from "../../store/user/selectors";
+import { updateProfileDB } from "../../store/profile/actions";
+import axios from "axios";
 import "./styles.scss";
 
 export const Registration: React.FC<IRegistrationProps> = ({ type }) => {
@@ -16,6 +17,7 @@ export const Registration: React.FC<IRegistrationProps> = ({ type }) => {
   const [name, setName] = useState("");
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   useEffect(() => {
     if (isAuth) navigate("/home");
@@ -34,6 +36,11 @@ export const Registration: React.FC<IRegistrationProps> = ({ type }) => {
 
   // handle Submit
   const handleBtn = async () => {
+    if (!name.trim() && type.toLowerCase() === "singup")
+      return setError("Name is empty");
+    else if (!login.trim()) return setError("Email is empty");
+    else if (!password.trim()) return setError("Password is empty");
+
     // login
     if (type.toLowerCase() === "login") {
       await axios
@@ -42,6 +49,7 @@ export const Registration: React.FC<IRegistrationProps> = ({ type }) => {
           password,
         })
         .then((res) => dispatch(setUser(res.data)))
+        .then(() => dispatch(updateProfileDB()))
         .then(() => navigate("/home"));
     }
     // sing up
@@ -53,6 +61,7 @@ export const Registration: React.FC<IRegistrationProps> = ({ type }) => {
           password,
         })
         .then((res) => dispatch(setUser(res.data)))
+        .then(() => dispatch(updateProfileDB()))
         .then(() => navigate("/home"));
     }
 
@@ -93,6 +102,8 @@ export const Registration: React.FC<IRegistrationProps> = ({ type }) => {
             value={password}
             onChange={handlePasswordChange}
           />
+
+          <h4 className="error">{error}</h4>
 
           {/* submit button */}
           <Button variant="outlined" color="success" onClick={handleBtn}>

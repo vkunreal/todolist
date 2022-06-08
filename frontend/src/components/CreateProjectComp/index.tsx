@@ -63,7 +63,7 @@ export const CreateProjectComp: React.FC = () => {
           </Button>
         </div>
 
-        <p className="error">{error}</p>
+        <h4 className="error">{error}</h4>
 
         <div className="createProjectComp-description">
           <p>
