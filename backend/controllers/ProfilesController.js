@@ -10,7 +10,7 @@ class ProfilesController {
 
   // get one profile
   async getProfileByUserId(req, res) {
-    const user_id = req.params.id;
+    const user_id = req.params.user_id;
 
     const profile = await ProfilesServices.getProfileByUserId(user_id);
 
@@ -32,6 +32,19 @@ class ProfilesController {
     const profile = await ProfilesServices.createProfile(user_id);
 
     res.status(201).json(profile);
+  }
+
+  async changeProfile(req, res) {
+    const profile_id = req.params.user_id;
+    const body = req.body;
+
+    const profile = await ProfilesServices.changeProfileByUserId(
+      body.name,
+      body.email,
+      profile_id
+    );
+
+    res.status(200).json(profile);
   }
 
   // change avatar in profile

@@ -1,11 +1,11 @@
 import { Avatar, Button, List, ListItem } from "@mui/material";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import { EditProfile } from "../../components/EditProfile";
 import { deleteUser } from "../../store/user/actions";
 import { selectUser } from "../../store/user/selectors";
-import axios from "axios";
+import { selectProfile } from "../../store/profile/selectors";
 import "./styles.scss";
 
 export const Profile = () => {
@@ -13,20 +13,12 @@ export const Profile = () => {
   const navigate = useNavigate();
 
   const user = useSelector(selectUser);
+  const profile = useSelector(selectProfile);
 
   const [image, setImage] = useState("");
   const [openDialog, setOpenDialog] = useState(false);
-  const [profile, setProfile] = useState<any>({});
 
-  useEffect(() => {
-    axios
-      .get(`/api/profile/image/${user?.id}`)
-      .then((res: any) => setImage(res.data.image));
-
-    axios.get(`/api/profile/${user?.id}`).then((res) => setProfile(res.data));
-  }, []);
-
-  const getTime = () => new Date(Number(profile.created_at)).toDateString();
+  const getTime = () => new Date(Number(profile?.created_at)).toDateString();
 
   const handleSingOut = () => {
     dispatch(deleteUser());
@@ -54,12 +46,12 @@ export const Profile = () => {
         </div>
 
         <div className="profile-rightside">
-          <Button variant="outlined" color="warning" onClick={handleSingOut}>
-            Sing Out
-          </Button>
-
           <Button variant="outlined" color="success" onClick={handleOpenDialog}>
             Edit
+          </Button>
+
+          <Button variant="outlined" color="error" onClick={handleSingOut}>
+            Sing Out
           </Button>
         </div>
 

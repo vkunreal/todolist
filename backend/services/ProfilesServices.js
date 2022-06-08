@@ -3,6 +3,7 @@ const { request } = require("../db");
 class ProfilesServices {
   constructor() {
     this.createProfile = this.createProfile.bind(this);
+    this.changeProfileByUserId = this.changeProfileByUserId.bind(this);
   }
 
   // get all profiles from database
@@ -49,6 +50,17 @@ class ProfilesServices {
     await request(sqlReq);
 
     return await this.getProfileByUserId(user_id);
+  }
+
+  async changeProfileByUserId(name, email, user_id) {
+    const sqlReq = `
+      UPDATE users SET name = "${name}", email="${email}" WHERE id = "${user_id}"
+    `;
+
+    await request(sqlReq);
+
+    const profile = await this.getProfileByUserId(user_id);
+    return profile;
   }
 
   async putAvatarImage(user_id, image) {

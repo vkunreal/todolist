@@ -2,6 +2,7 @@ import { IStore } from "./../interfaces";
 import axios from "axios";
 import { Dispatch } from "redux";
 import { IProject } from "./../../components/ProjectsList/interfaces";
+
 export enum ProjectsAction {
   SET_PROJECTS = "PROJECTS::SET_PROJECTS",
   ADD_PROJECT = "PROJECTS::ADD_PROJECT",

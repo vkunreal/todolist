@@ -37,7 +37,15 @@ export const ProjectsList: React.FC = () => {
     setPageProjects(projects.slice((page - 1) * 5, page * 5));
   }, [page]);
 
-  const handleDelete = (id: number) => dispatch(deleteProjectDB(id));
+  useEffect(() => {
+    if (!pageProjects.length && page !== 1) {
+      setPage((prevVal) => prevVal - 1);
+    }
+  }, [pageProjects]);
+
+  const handleDelete = (id: number) => {
+    dispatch(deleteProjectDB(id));
+  };
 
   // change page
   const handlePaginationChange = (

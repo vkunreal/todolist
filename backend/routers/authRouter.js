@@ -20,6 +20,7 @@ authRouter.post(
 authRouter.post(
   "/registration",
   [
+    check("name", "Uncorrected data").notEmpty(),
     check("email", "Uncorrected data").notEmpty().isEmail(),
     check("password", "Uncorrected data")
       .notEmpty()
