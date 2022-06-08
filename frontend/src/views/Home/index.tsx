@@ -1,13 +1,20 @@
+import { useSelector } from "react-redux";
 import { CreateProjectComp } from "../../components/CreateProjectComp";
 import { ProjectsList } from "../../components/ProjectsList";
+import { selectAuth } from "../../store/user/selectors";
 import "./styles.scss";
 
 export const Home = () => {
-  return (
-    <div className="homeComp">
-      <CreateProjectComp />
+  const isAuth = useSelector(selectAuth);
 
-      <ProjectsList />
+  return (
+    <div>
+      {isAuth && (
+        <div className="homeComp">
+          <CreateProjectComp />
+          <ProjectsList />
+        </div>
+      )}
     </div>
   );
 };
