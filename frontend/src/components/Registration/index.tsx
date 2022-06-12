@@ -99,6 +99,7 @@ export const Registration: React.FC<IRegistrationProps> = ({ type }) => {
           <TextField
             label="Password"
             variant="outlined"
+            type="password"
             value={password}
             onChange={handlePasswordChange}
           />
