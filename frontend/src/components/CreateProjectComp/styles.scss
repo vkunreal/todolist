@@ -1,11 +1,11 @@
 .createProjectComp {
-  width: 30%;
+  width: 50%;
   display: flex;
-  padding-top: 150px;
+  padding-top: 10%;
   flex-direction: column;
   align-items: center;
   gap: 30px;
-  margin-left: 200px;
+  margin-left: 2%;
   border-right: 1px solid #ccc;
 
   &-form {

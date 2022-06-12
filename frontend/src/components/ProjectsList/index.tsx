@@ -56,7 +56,7 @@ export const ProjectsList: React.FC = () => {
   return (
     <div className="projectsList">
       {/* Heading */}
-      <h1 className="projectsList-heading">Projects List {page}</h1>
+      <h1 className="projectsList-heading">Projects List</h1>
 
       {/* List of projects */}
       <div className="projectsList">

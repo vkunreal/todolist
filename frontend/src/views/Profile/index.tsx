@@ -2,7 +2,7 @@ import { Avatar, Button, List, ListItem } from "@mui/material";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
-import { EditProfile } from "../../components/EditProfile";
+import { EditProfileDialog } from "../../components/EditProfileDialog";
 import { deleteUser } from "../../store/user/actions";
 import { selectUser } from "../../store/user/selectors";
 import { selectProfile } from "../../store/profile/selectors";
@@ -55,7 +55,7 @@ export const Profile = () => {
           </Button>
         </div>
 
-        <EditProfile
+        <EditProfileDialog
           isOpen={openDialog}
           handleCloseDialog={handleCloseDialog}
         />
