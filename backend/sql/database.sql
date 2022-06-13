@@ -19,7 +19,6 @@ DROP TABLE IF EXISTS `profiles`;
 CREATE TABLE `profiles` (
 	user_id SERIAL PRIMARY KEY,
     created_at VARCHAR(50) NOT NULL,
-    image VARCHAR(13000),
     
     FOREIGN KEY (user_id) REFERENCES users(id) ON UPDATE CASCADE ON DELETE CASCADE
 );

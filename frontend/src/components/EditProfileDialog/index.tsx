@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { IEditProfileProps } from "./interfaces";
 import {
   Button,
@@ -9,7 +9,7 @@ import {
   TextField,
 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { changeProfile } from "../../store/profile/actions";
+import { changeProfile, setAvatarDB } from "../../store/profile/actions";
 import { selectUser } from "../../store/user/selectors";
 import "./styles.scss";
 
@@ -19,7 +19,9 @@ export const EditProfileDialog: React.FC<IEditProfileProps> = ({
 }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [image, setImage] = useState("");
   const [error, setError] = useState("");
+  const fileRef = useRef<any>(null);
 
   const user = useSelector(selectUser);
 
@@ -34,6 +36,17 @@ export const EditProfileDialog: React.FC<IEditProfileProps> = ({
     setName(e.target.value);
   const handleChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) =>
     setEmail(e.target.value);
+  const handleOpenFile = () => fileRef.current.click();
+
+  const handleChangeInput = (e: any) => {
+    const files: any[] = Array.from(e.target.files);
+    const reader = new FileReader();
+
+    reader.onload = (e: any) => setImage(e.currentTarget.result);
+    reader.readAsDataURL(files[0]);
+  };
+
+  const handleLoadImage = () => dispatch(setAvatarDB(image));
 
   const handleChangeProfile = async () => {
     if (!name.trim()) setError("Name is empty");
@@ -60,6 +73,22 @@ export const EditProfileDialog: React.FC<IEditProfileProps> = ({
             value={email}
             onChange={handleChangeEmail}
           />
+
+          <input
+            type="file"
+            style={{ display: "none" }}
+            accept="image/jpeg,image/png"
+            ref={fileRef}
+            onChange={handleChangeInput}
+          />
+
+          <Button variant="outlined" color="success" onClick={handleOpenFile}>
+            Open
+          </Button>
+
+          <Button variant="outlined" color="success" onClick={handleLoadImage}>
+            Load
+          </Button>
 
           <h4 className="error">{error}</h4>
 

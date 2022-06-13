@@ -8,6 +8,7 @@ import { IProfile } from "./interfaces";
 export enum ProfileActions {
   SET_PROFILE = "PROFILES::SET_PROFILE",
   SET_SELECTED_USER = "PROFILES::SET_SELECTED_USER",
+  SET_AVATAR = "PROFILES::SET_AVATAR",
 }
 
 const setProfile = (profile: IProfile) => ({
@@ -18,6 +19,11 @@ const setProfile = (profile: IProfile) => ({
 const setSelectedUser = (user: IUser) => ({
   type: ProfileActions.SET_SELECTED_USER,
   payload: user,
+});
+
+export const setAvatar = (image: string) => ({
+  type: ProfileActions.SET_AVATAR,
+  payload: image,
 });
 
 export const updateProfileDB: any =
@@ -44,4 +50,25 @@ export const setSelectedUserDB: any =
     await axios
       .get(`/api/users/${user_id}`)
       .then((res) => dispatch(setSelectedUser(res.data)));
+  };
+
+export const setAvatarDB: any =
+  (image: string) => async (dispatch: Dispatch, getState: () => IStore) => {
+    const user_id = getState().user.user?.id;
+
+    await axios
+      .put(`/api/profile/image`, {
+        user_id,
+        image,
+      })
+      .then((res) => dispatch(setAvatar(res.data)));
+  };
+
+export const updateAvatarDB: any =
+  () => async (dispatch: Dispatch, getState: () => IStore) => {
+    const user_id = getState().user.user?.id;
+
+    await axios
+      .get(`/api/profile/image/${user_id}`)
+      .then((res) => dispatch(setAvatar(res.data)));
   };

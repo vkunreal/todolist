@@ -6,7 +6,7 @@ profilesRouter.get("/profiles", ProfilesController.getProfiles);
 profilesRouter.get("/profile/:user_id", ProfilesController.getProfileByUserId);
 profilesRouter.get(
   "/profile/image/:user_id",
-  ProfilesController.getProfileImage
+  ProfilesController.getAvatarImage
 );
 
 // create profile

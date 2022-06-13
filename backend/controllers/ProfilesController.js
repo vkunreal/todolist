@@ -1,4 +1,6 @@
 const ProfilesServices = require("../services/ProfilesServices");
+const fs = require("fs");
+const path = require("path");
 
 class ProfilesController {
   // get all profiles
@@ -15,14 +17,6 @@ class ProfilesController {
     const profile = await ProfilesServices.getProfileByUserId(user_id);
 
     res.status(200).json(profile);
-  }
-
-  async getProfileImage(req, res) {
-    const user_id = req.params.user_id;
-
-    const image = await ProfilesServices.getProfileImageByUserId(user_id);
-
-    res.status(200).json(image);
   }
 
   // create new profile
@@ -50,10 +44,33 @@ class ProfilesController {
   // change avatar in profile
   async putAvatarImage(req, res) {
     const { user_id, image } = req.body;
+    const link = path.resolve(
+      __dirname,
+      "..",
+      "images",
+      `${user_id}-avatar.txt`
+    );
 
-    const avatar = await ProfilesServices.putAvatarImage(user_id, image);
+    await fs.writeFile(link, image, (err) => {
+      if (err) return console.error(err);
 
-    res.status(200).json(avatar);
+      const data = fs.readFileSync(link, "utf8");
+      res.status(200).json(data);
+    });
+  }
+
+  async getAvatarImage(req, res) {
+    const { user_id } = req.params;
+
+    await fs.readFile(
+      path.resolve(__dirname, "..", "images", `${user_id}-avatar.txt`),
+      "utf8",
+      (err, data) => {
+        if (err) return console.error(err);
+
+        res.status(200).json(data);
+      }
+    );
   }
 
   // delete one profile

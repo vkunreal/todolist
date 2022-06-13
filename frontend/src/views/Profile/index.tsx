@@ -5,15 +5,18 @@ import { Avatar, Button, List, ListItem } from "@mui/material";
 import { EditProfileDialog } from "../../components/EditProfileDialog";
 import { deleteUser } from "../../store/user/actions";
 import {
+  selectAvatar,
   selectProfile,
   selectSelectedUser,
 } from "../../store/profile/selectors";
-import "./styles.scss";
 import {
+  setAvatarDB,
   setSelectedUserDB,
+  updateAvatarDB,
   updateProfileDB,
 } from "../../store/profile/actions";
 import { selectAuth } from "../../store/user/selectors";
+import "./styles.scss";
 
 export const Profile = () => {
   const dispatch = useDispatch();
@@ -23,13 +26,14 @@ export const Profile = () => {
   const user = useSelector(selectSelectedUser);
   const profile = useSelector(selectProfile);
   const isAuth = useSelector(selectAuth);
+  const avatar = useSelector(selectAvatar);
 
-  const [image, setImage] = useState("");
   const [openDialog, setOpenDialog] = useState(false);
 
   useEffect(() => {
     dispatch(updateProfileDB(params.id));
     dispatch(setSelectedUserDB(params.id));
+    dispatch(updateAvatarDB());
   }, []);
 
   const getTime = () => new Date(Number(profile?.created_at)).toDateString();
@@ -50,7 +54,11 @@ export const Profile = () => {
 
       <main className="profile-main">
         <div className="profile-leftside">
-          <Avatar src={image} alt="Avatar" sx={{ width: 340, height: 340 }} />
+          <Avatar
+            src={avatar || ""}
+            alt="Avatar"
+            sx={{ width: 340, height: 340 }}
+          />
 
           <List className="info-list">
             <ListItem>Name: {user?.name}</ListItem>
