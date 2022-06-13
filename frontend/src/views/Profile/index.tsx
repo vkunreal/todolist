@@ -1,22 +1,36 @@
-import { Avatar, Button, List, ListItem } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router";
+import { Avatar, Button, List, ListItem } from "@mui/material";
 import { EditProfileDialog } from "../../components/EditProfileDialog";
 import { deleteUser } from "../../store/user/actions";
-import { selectUser } from "../../store/user/selectors";
-import { selectProfile } from "../../store/profile/selectors";
+import {
+  selectProfile,
+  selectSelectedUser,
+} from "../../store/profile/selectors";
 import "./styles.scss";
+import {
+  setSelectedUserDB,
+  updateProfileDB,
+} from "../../store/profile/actions";
+import { selectAuth } from "../../store/user/selectors";
 
 export const Profile = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const params = useParams();
 
-  const user = useSelector(selectUser);
+  const user = useSelector(selectSelectedUser);
   const profile = useSelector(selectProfile);
+  const isAuth = useSelector(selectAuth);
 
   const [image, setImage] = useState("");
   const [openDialog, setOpenDialog] = useState(false);
+
+  useEffect(() => {
+    dispatch(updateProfileDB(params.id));
+    dispatch(setSelectedUserDB(params.id));
+  }, []);
 
   const getTime = () => new Date(Number(profile?.created_at)).toDateString();
 
@@ -45,15 +59,21 @@ export const Profile = () => {
           </List>
         </div>
 
-        <div className="profile-rightside">
-          <Button variant="outlined" color="success" onClick={handleOpenDialog}>
-            Edit
-          </Button>
+        {isAuth && (
+          <div className="profile-rightside">
+            <Button
+              variant="outlined"
+              color="success"
+              onClick={handleOpenDialog}
+            >
+              Edit
+            </Button>
 
-          <Button variant="outlined" color="error" onClick={handleSingOut}>
-            Sing Out
-          </Button>
-        </div>
+            <Button variant="outlined" color="error" onClick={handleSingOut}>
+              Sing Out
+            </Button>
+          </div>
+        )}
 
         <EditProfileDialog
           isOpen={openDialog}

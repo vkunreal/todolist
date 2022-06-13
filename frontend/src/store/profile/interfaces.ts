@@ -1,3 +1,4 @@
+import { IUser } from "./../user/interfaces";
 import { ProfileActions } from "./actions";
 
 export interface IProfile {
@@ -8,6 +9,7 @@ export interface IProfile {
 
 export interface IProfileState {
   profile: IProfile | null;
+  selectedUser: IUser | null;
 }
 
 interface ISetProfile {
@@ -15,4 +17,9 @@ interface ISetProfile {
   payload: IProfile;
 }
 
-export type ProfileAction = ISetProfile;
+interface ISetSelectedUser {
+  type: ProfileActions.SET_SELECTED_USER;
+  payload: IUser;
+}
+
+export type ProfileAction = ISetProfile | ISetSelectedUser;

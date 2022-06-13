@@ -1,7 +1,8 @@
 import React, { useRef, useState } from "react";
+import { useNavigate } from "react-router";
 import { Button } from "@mui/material";
 import { IProjectProps } from "./interfaces";
-import { getDate } from "./date";
+import { getDate, getInd } from "./services";
 import { DeleteProjectDialog } from "../DeleteProjectDialog";
 import "./styles.scss";
 
@@ -11,23 +12,23 @@ export const Project: React.FC<IProjectProps> = React.memo(
     const [open, setOpen] = useState(false);
     const projectRef = useRef<HTMLDivElement>(null);
 
+    const navigate = useNavigate();
+
     const handleClose = () => setOpen(false);
     const openDialog = () => setOpen(true);
 
     const handleDelete = () => {
-      const className = projectRef.current?.getAttribute("class");
+      const ind = getInd(projectRef);
 
-      if (className) {
-        const ind = Number(className.match(/\d/g)?.join(""));
-
-        onDelete(ind);
-        setOpen(false);
-      }
+      onDelete(ind ? ind : 0);
+      setOpen(false);
     };
+
+    const openProject = () => navigate(`/project/${getInd(projectRef)}`);
 
     return (
       <div className={className} ref={projectRef}>
-        <div>
+        <div onClick={openProject}>
           <h1 className="project-heading">{name}</h1>
 
           <p className="project-description">{description}</p>
