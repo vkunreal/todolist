@@ -1,5 +1,5 @@
 import { IStore } from "./../interfaces";
 
-export const selectUser = (state: IStore) => state.user.user;
-
-export const selectAuth = (state: IStore) => state.user.isAuth;
+export const selectUser = (store: IStore) => store.user.user;
+export const selectAuth = (store: IStore) => store.user.isAuth;
+export const selectUserId = (store: IStore) => store.user.user?.id;

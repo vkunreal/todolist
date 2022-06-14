@@ -66,7 +66,7 @@ export const setAvatarDB: any =
 
 export const updateAvatarDB: any =
   () => async (dispatch: Dispatch, getState: () => IStore) => {
-    const user_id = getState().user.user?.id;
+    const user_id = getState().profile.selectedUser?.id;
 
     await axios
       .get(`/api/profile/image/${user_id}`)

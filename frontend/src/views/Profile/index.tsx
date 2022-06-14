@@ -15,26 +15,31 @@ import {
   updateAvatarDB,
   updateProfileDB,
 } from "../../store/profile/actions";
-import { selectAuth } from "../../store/user/selectors";
+import { selectAuth, selectUserId } from "../../store/user/selectors";
 import "./styles.scss";
 
 export const Profile = () => {
+  const [openDialog, setOpenDialog] = useState(false);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const params = useParams();
 
-  const user = useSelector(selectSelectedUser);
+  const selectedUser = useSelector(selectSelectedUser);
+  const userId = useSelector(selectUserId);
   const profile = useSelector(selectProfile);
   const isAuth = useSelector(selectAuth);
   const avatar = useSelector(selectAvatar);
-
-  const [openDialog, setOpenDialog] = useState(false);
 
   useEffect(() => {
     dispatch(updateProfileDB(params.id));
     dispatch(setSelectedUserDB(params.id));
     dispatch(updateAvatarDB());
   }, []);
+
+  useEffect(() => {
+    dispatch(updateAvatarDB());
+  }, [selectedUser]);
 
   const getTime = () => new Date(Number(profile?.created_at)).toDateString();
 
@@ -61,13 +66,13 @@ export const Profile = () => {
           />
 
           <List className="info-list">
-            <ListItem>Name: {user?.name}</ListItem>
-            <ListItem>Email: {user?.email}</ListItem>
+            <ListItem>Name: {selectedUser?.name}</ListItem>
+            <ListItem>Email: {selectedUser?.email}</ListItem>
             <ListItem>Created at: {getTime()}</ListItem>
           </List>
         </div>
 
-        {isAuth && (
+        {isAuth && selectedUser?.id === userId && (
           <div className="profile-rightside">
             <Button
               variant="outlined"
