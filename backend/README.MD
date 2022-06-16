@@ -129,10 +129,10 @@ Create a new project
 
 | Name | Name/Type | Type | 
 | --- | --- | --- |
-| user_id | Number | - |
-| Project | - | - | 
-| - | name | String |
-| - | description | String |
+| user_id | Number | |
+| Project | | | 
+| | name | String |
+| | description | String |
 
 
 ### DELETE `/project/:id`
