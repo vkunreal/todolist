@@ -125,12 +125,8 @@ Returns Project
 
 Create a new project
 
-Body:
-> user_id - Number
-> project - {
->> name - String
->> description - String
-}
+## Body
+
 | Name | Type |
 | --- | --- |
 | user_id | Number |
