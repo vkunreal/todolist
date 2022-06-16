@@ -21,8 +21,8 @@ Server would open on adress [http://localhost:5000](http://localhost:5000).
 Login
 Returns User
 
-| Body |
-|---| |---|
+## Body 
+
 | Name | Type |
 | --- | --- |
 | email | String |
@@ -33,11 +33,13 @@ Returns User
 Create a new user
 Returns User
 
-Body:
+## Body
 
-- name - String
-- email - String
-- password - String
+| Name | Type |
+| --- | --- |
+| name | String |
+| email | String |
+| password | String |
 
 # Profiles
 
@@ -61,34 +63,46 @@ Returns image
 Create Profile
 Returns Profile
 
-Body:
-> user_id - Number
+## Body
+
+| Name | Type |
+| --- | --- |
+| user_id | Number |
 
 ### POST `/api/profile/:user_id`
 
 Change Profile
 Returns Profile
 
-Body:
-> name - String
-> email - String
+## Body
+
+| Name | Type |
+| --- | --- |
+| name | String |
+| email | String |
 
 ### PUT `/api/profile/image`
 
 Change Profile image
 Returns image
 
-Body:
-> user_id - Number
-> image - String
+## Body
+
+| Name | Type |
+| --- | --- |
+| user_id | Number |
+| image | String |
 
 ### DELETE `/api/profile`
 
 Delete profile
 Returns message "Profile deleted"
 
-Body:
-> user_id - Number
+## Body
+
+| Name | Type |
+| --- | --- |
+| user_id | Number |
 
 # Projects
 
@@ -117,6 +131,12 @@ Body:
 >> name - String
 >> description - String
 }
+| Name | Type |
+| --- | --- |
+| user_id | Number |
+| Project |
+| name | String |
+| description | String |
 
 ### DELETE `/project/:id`
 
