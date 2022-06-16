@@ -2,6 +2,9 @@
 
 In the project directory, you can run:
 
+### `yarn`
+Runs installing dependencies
+
 ### `yarn start`
 
 Runs the app in the ready mode.\
