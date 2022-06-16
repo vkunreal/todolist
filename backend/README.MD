@@ -22,8 +22,9 @@ Login
 Returns User
 
 | Body |
-|:-----:| |:-----:|
+|:-------------:|
 | Name | | Type |
+|:-----:| |:-----:|
 | email | | String |
 | password | | String |
 
