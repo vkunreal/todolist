@@ -130,9 +130,9 @@ Create a new project
 | Name | Type |
 | --- | --- | --- |
 | user_id | Number |
-| Project | | | 
-| | name | String |
-| | description | String |
+| Project | - | - | 
+| - | name | String |
+| - | description | String |
 
 
 ### DELETE `/project/:id`
@@ -156,10 +156,12 @@ Returns User
 Create a new User
 Returns User
 
-Body:
-> name - String
-> email - String
-> password - String
+## Body
+| Name | Type |
+|---|---|
+| name | String |
+| email | String |
+| password | String |
 
 ### DELETE `/api/users/:id`
 
