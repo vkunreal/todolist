@@ -127,7 +127,7 @@ Create a new project
 
 ## Body
 
-| Name | Type |
+| Name | Name/Type | Type | 
 | --- | --- | --- |
 | user_id | Number | - |
 | Project | - | - | 
