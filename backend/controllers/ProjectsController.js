@@ -45,6 +45,14 @@ class ProjectsController {
 
     res.status(200).json(data);
   }
+
+  // get todos by project's id
+  async getTodos(req, res) {
+    const project_id = req.params.project_id;
+    const todos = await ProjectsServices.getTodosByProjectId(project_id);
+
+    res.status(200).json(todos);
+  }
 }
 
 module.exports = new ProjectsController();

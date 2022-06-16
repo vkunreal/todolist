@@ -5,6 +5,7 @@ import { Home } from "./Home";
 import { News } from "./News";
 import { NotFound } from "./NotFound";
 import { Profile } from "./Profile";
+import { ProjectPage } from "./ProjectPage";
 
 export const RoutesComp = () => {
   return (
@@ -15,7 +16,8 @@ export const RoutesComp = () => {
         <Route path="/" element={<Navigate to="/home" />} />
         <Route path="/home" element={<Home />} />
         <Route path="/news" element={<News />} />
-        <Route path="/profile/:id" element={<Profile />} />
+        <Route path="/profile/:profile_id" element={<Profile />} />
+        <Route path="/project/:project_id" element={<ProjectPage />} />
         <Route path="/auth/login" element={<Authtorization type={"login"} />} />
         <Route
           path="/auth/singup"

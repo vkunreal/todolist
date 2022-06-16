@@ -10,7 +10,7 @@ const middlewares = [thunk];
 
 const persistConfig = {
   key: "root",
-  blacklist: ["profile"],
+  blacklist: ["profile", "user"],
   storage,
 };
 

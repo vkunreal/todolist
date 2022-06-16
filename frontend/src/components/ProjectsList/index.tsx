@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Pagination } from "@mui/material";
 
 import { Project } from "../Project";
-import { IProject } from "./interfaces";
+import { IProject } from "../../store/projects/interfaces";
 import { selectProjects } from "../../store/projects/selectors";
 import {
   deleteProjectDB,

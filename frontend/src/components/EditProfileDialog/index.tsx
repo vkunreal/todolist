@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { IEditProfileProps } from "./interfaces";
 import {
   Button,
@@ -21,7 +21,7 @@ export const EditProfileDialog: React.FC<IEditProfileProps> = ({
   const [email, setEmail] = useState("");
   const [image, setImage] = useState("");
   const [error, setError] = useState("");
-  const fileRef = useRef<any>(null);
+  const fileRef = useRef<HTMLInputElement | null>(null);
 
   const user = useSelector(selectUser);
 
@@ -36,10 +36,10 @@ export const EditProfileDialog: React.FC<IEditProfileProps> = ({
     setName(e.target.value);
   const handleChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) =>
     setEmail(e.target.value);
-  const handleOpenFile = () => fileRef.current.click();
+  const handleOpenFile = () => fileRef?.current?.click();
 
-  const handleChangeInput = (e: any) => {
-    const files: any[] = Array.from(e.target.files);
+  const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files: File[] = Array.from(e.target?.files || []);
     const reader = new FileReader();
 
     reader.onload = (e: any) => setImage(e.currentTarget.result);

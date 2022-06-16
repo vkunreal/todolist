@@ -10,6 +10,8 @@ projectsRouter.get(
 );
 projectsRouter.get("/project/:id", ProjectsController.getProject);
 
+projectsRouter.get("/todos/:project_id", ProjectsController.getTodos);
+
 projectsRouter.post("/project", ProjectsController.addProject);
 
 projectsRouter.delete("/project/:id", ProjectsController.deleteProject);

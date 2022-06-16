@@ -6,21 +6,18 @@ class ProjectsServices {
     return await request("SELECT * FROM projects");
   }
 
+  // get all user's projects
   async getProjectsByUserId(id) {
     const sqlReq = `SELECT * FROM projects WHERE id IN (SELECT project_id FROM projects_users WHERE user_id = "${id}")`;
     return await request(sqlReq);
   }
 
-  /**
-   * get one project from database by id
-   *
-   * @param {string} id
-   * @return {User}
-   */
+  // get project by project's id
   async getProjectById(id) {
     return await request(`SELECT * FROM projects WHERE id = "${id}"`);
   }
 
+  // add project in database by user's id
   async addProjectByUserId(proj, user_id) {
     const lastUpdate = new Date().getTime();
     const projectId = Math.round(Math.random() * 100000000);
@@ -41,14 +38,15 @@ class ProjectsServices {
     return await request(reqGetProject);
   }
 
-  /**
-   * delete one project from database by id
-   *
-   * @param {string} id
-   * @return {Request Data}
-   */
-  async deleteProjectById(id) {
-    await request(`DELETE FROM projects WHERE id = "${id}"`);
+  // delete project by project's id
+  async deleteProjectById(project_id) {
+    await request(`DELETE FROM projects WHERE id = "${project_id}"`);
+  }
+
+  // get all todos by project's id
+  async getTodosByProjectId(project_id) {
+    const reqTodos = `SELECT * FROM todocards WHERE project_id IN (SELECT id FROM projects WHERE id = "${project_id}")`;
+    return await request(reqTodos);
   }
 }
 

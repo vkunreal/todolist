@@ -23,6 +23,26 @@ CREATE TABLE `profiles` (
     FOREIGN KEY (user_id) REFERENCES users(id) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
+-- friends
+DROP TABLE IF EXISTS friends;
+CREATE TABLE friends (
+	user1_id BIGINT UNSIGNED NOT NULL,
+    user2_id BIGINT UNSIGNED NOT NULL,
+    
+    FOREIGN KEY (user1_id) REFERENCES users(id) ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY (user2_id) REFERENCES users(id) ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+-- user_subscribers
+DROP TABLE IF EXISTS user_subscribers;
+CREATE TABLE user_subscribers (
+	user1_id BIGINT UNSIGNED NOT NULL,
+    user2_id BIGINT UNSIGNED NOT NULL,
+    
+    FOREIGN KEY (user1_id) REFERENCES users(id) ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY (user2_id) REFERENCES users(id) ON UPDATE CASCADE ON DELETE CASCADE
+);
+
 -- projects
 DROP TABLE IF EXISTS projects;
 CREATE TABLE projects (
@@ -33,14 +53,27 @@ CREATE TABLE projects (
 );
 
 -- list of todo cards
-DROP TABLE IF EXISTS todo_cards;
-CREATE TABLE todo_cards (
+DROP TABLE IF EXISTS todocards;
+CREATE TABLE todocards (
 	id SERIAL PRIMARY KEY,
     `name` VARCHAR(100) NOT NULL,
     `description` VARCHAR(500),
+    is_done BIT default 0,
     project_id BIGINT UNSIGNED NOT NULL,
     
     FOREIGN KEY (project_id) REFERENCES projects(id) ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+DROP TABLE IF EXISTS todocard_comments;
+CREATE TABLE todocard_comments (
+	id SERIAL PRIMARY KEY,
+    user_id BIGINT UNSIGNED NOT NULL,
+    `text` VARCHAR(1000) NOT NULL,
+    `date` BIGINT UNSIGNED NOT NULL,
+    likes INT NOT NULL default 0,
+    is_deleted BIT default 0,
+    
+    FOREIGN KEY (user_id) REFERENCES users(id) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 -- projects - users
@@ -51,6 +84,16 @@ CREATE TABLE projects_users (
     
     FOREIGN KEY (project_id) REFERENCES projects(id) ON UPDATE CASCADE ON DELETE CASCADE,
     FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
+-- todocards_users
+DROP TABLE IF EXISTS todocards_users;
+CREATE TABLE todocards_users (
+	todocard_id BIGINT UNSIGNED NOT NULL,
+    user_id BIGINT UNSIGNED NOT NULL,
+    
+    FOREIGN KEY (todocard_id) REFERENCES todocards(id) ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 /* Insert information */

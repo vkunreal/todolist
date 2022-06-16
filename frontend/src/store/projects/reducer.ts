@@ -3,6 +3,7 @@ import { IProjectsAction, IProjectsState } from "./interfaces";
 
 const initState: IProjectsState = {
   projects: [],
+  todos: [],
 };
 
 export const projectsReducer = (
@@ -28,6 +29,26 @@ export const projectsReducer = (
       return {
         ...state,
         projects: newProjects,
+      };
+
+    case ProjectsAction.SET_TODOS:
+      return {
+        ...state,
+        todos: payload,
+      };
+
+    case ProjectsAction.ADD_TODO:
+      return {
+        ...state,
+        todos: [...state.todos, payload],
+      };
+
+    case ProjectsAction.DELETE_TODO:
+      const newTodos = state.todos.filter((todo) => todo.id !== payload);
+
+      return {
+        ...state,
+        todos: newTodos,
       };
 
     default:

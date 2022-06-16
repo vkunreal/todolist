@@ -31,8 +31,8 @@ export const Profile = () => {
   const avatar = useSelector(selectAvatar);
 
   useEffect(() => {
-    dispatch(updateProfileDB(params.id));
-    dispatch(setSelectedUserDB(params.id));
+    dispatch(updateProfileDB(params.profile_id));
+    dispatch(setSelectedUserDB(params.profile_id));
     dispatch(updateAvatarDB());
   }, []);
 
