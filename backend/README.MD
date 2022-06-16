@@ -129,7 +129,7 @@ Create a new project
 
 | Name | Type |
 | --- | --- | --- |
-| user_id | Number |
+| user_id | Number | - |
 | Project | - | - | 
 | - | name | String |
 | - | description | String |
