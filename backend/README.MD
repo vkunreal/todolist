@@ -23,9 +23,8 @@ Returns User
 
 Body:
 
-## email - String
-
-## password - String
+> email - String
+> password - String
 
 ### POST `/auth/registration`
 
@@ -34,11 +33,9 @@ Returns User
 
 Body:
 
-## name - String
-
-## email - String
-
-## password - String
+> name - String
+> email - String
+> password - String
 
 # Profiles
 
@@ -63,7 +60,7 @@ Create Profile
 Returns Profile
 
 Body:
-user_id - Number
+> user_id - Number
 
 ### POST `/api/profile/:user_id`
 
@@ -71,8 +68,8 @@ Change Profile
 Returns Profile
 
 Body:
-name - String
-email - String
+> name - String
+> email - String
 
 ### PUT `/api/profile/image`
 
@@ -80,8 +77,8 @@ Change Profile image
 Returns image
 
 Body:
-user_id - Number
-image - String
+> user_id - Number
+> image - String
 
 ### DELETE `/api/profile`
 
@@ -89,7 +86,7 @@ Delete profile
 Returns message "Profile deleted"
 
 Body:
-user_id - Number
+> user_id - Number
 
 # Projects
 
@@ -113,10 +110,10 @@ Returns Project
 Create a new project
 
 Body:
-user_id - Number
-project - {
-name - String
-description - String
+> user_id - Number
+> project - {
+>> name - String
+>> description - String
 }
 
 ### DELETE `/project/:id`
@@ -141,9 +138,9 @@ Create a new User
 Returns User
 
 Body:
-name - String
-email - String
-password - String
+> name - String
+> email - String
+> password - String
 
 ### DELETE `/api/users/:id`
 
