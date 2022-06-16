@@ -22,7 +22,7 @@ Login
 Returns User
 
 | Body |
-|-------------|
+|---| |---|
 | Name | Type |
 | --- | --- |
 | email | String |
@@ -35,9 +35,9 @@ Returns User
 
 Body:
 
-> name - String
-> email - String
-> password - String
+- name - String
+- email - String
+- password - String
 
 # Profiles
 
