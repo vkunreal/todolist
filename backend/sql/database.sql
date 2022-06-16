@@ -19,7 +19,6 @@ DROP TABLE IF EXISTS `profiles`;
 CREATE TABLE `profiles` (
 	user_id SERIAL PRIMARY KEY,
     created_at VARCHAR(50) NOT NULL,
-    image VARCHAR(13000),
     
     FOREIGN KEY (user_id) REFERENCES users(id) ON UPDATE CASCADE ON DELETE CASCADE
 );
@@ -84,8 +83,8 @@ VALUES
 
 INSERT INTO profiles(user_id, created_at)
 VALUES
-(1, "2020-2-1"),
-(2, "2021-1-2"),
-(3, "2022-2-5"),
-(4, "2019-4-7"),
-(5, "2022-3-3");
+(1, "1655100111802"),
+(2, "1655100111802"),
+(3, "1655100111802"),
+(4, "1655100111802"),
+(5, "1655100111802");
