@@ -1,10 +1,11 @@
-import { AppBar, Box, Button, Toolbar, Typography } from "@mui/material";
+import React from "react";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import { AppBar, Box, Button, Toolbar, Typography } from "@mui/material";
 import { selectAuth, selectUser } from "../../store/user/selectors";
 import "./styles.scss";
 
-export const Navbar: React.FC = () => {
+export const Navbar: React.FC = React.memo(() => {
   const isAuth = useSelector(selectAuth);
   const user = useSelector(selectUser);
   const navigate = useNavigate();
@@ -41,9 +42,9 @@ export const Navbar: React.FC = () => {
       </Box>
     </nav>
   );
-};
+});
 
-const AuthBtns: React.FC = () => {
+const AuthBtns: React.FC = React.memo(() => {
   return (
     <div className="authBtns">
       <Link to="/auth/login">
@@ -59,4 +60,4 @@ const AuthBtns: React.FC = () => {
       </Link>
     </div>
   );
-};
+});

@@ -15,7 +15,6 @@ export const ProjectsList: React.FC = () => {
   // projects
   const projects = useSelector(selectProjects);
   const [pageProjects, setPageProjects] = useState<IProject[]>([]);
-
   // pages
   const [page, setPage] = useState(1);
   const [countPages, setCountPages] = useState(0);
@@ -33,16 +32,19 @@ export const ProjectsList: React.FC = () => {
     setPageProjects(projects.slice((page - 1) * 5, page * 5));
   }, [projects]);
 
+  // set new page's projects, when page changed
   useEffect(() => {
     setPageProjects(projects.slice((page - 1) * 5, page * 5));
   }, [page]);
 
+  // delete page if projects ended
   useEffect(() => {
     if (!pageProjects.length && page !== 1) {
       setPage((prevVal) => prevVal - 1);
     }
   }, [pageProjects]);
 
+  // delete project
   const handleDelete = (id: number) => {
     dispatch(deleteProjectDB(id));
   };
@@ -60,17 +62,16 @@ export const ProjectsList: React.FC = () => {
 
       {/* List of projects */}
       <div className="projectsList">
-        {!!projects.length &&
-          pageProjects.map((proj) => (
-            <Project
-              name={proj.name}
-              description={proj.description}
-              last_update={proj.last_update}
-              onDelete={handleDelete}
-              id={proj.id}
-              key={proj.id}
-            />
-          ))}
+        {pageProjects.map((proj) => (
+          <Project
+            name={proj.name}
+            description={proj.description}
+            last_update={proj.last_update}
+            onDelete={handleDelete}
+            id={proj.id}
+            key={proj.id}
+          />
+        ))}
 
         {/* Loading */}
         {!projects.length && <div className="spinner"></div>}
@@ -79,8 +80,8 @@ export const ProjectsList: React.FC = () => {
       {/* Pagination */}
       <div className="projectsList-pagination">
         <Pagination
-          count={countPages}
           size="large"
+          count={countPages}
           page={page}
           onChange={handlePaginationChange}
         />

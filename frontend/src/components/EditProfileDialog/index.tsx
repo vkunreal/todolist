@@ -21,10 +21,9 @@ export const EditProfileDialog: React.FC<IEditProfileProps> = ({
   const [email, setEmail] = useState("");
   const [image, setImage] = useState("");
   const [error, setError] = useState("");
+
   const fileRef = useRef<HTMLInputElement | null>(null);
-
   const user = useSelector(selectUser);
-
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -46,9 +45,11 @@ export const EditProfileDialog: React.FC<IEditProfileProps> = ({
     reader.readAsDataURL(files[0]);
   };
 
+  // set choosed avatar
   const handleLoadImage = () => dispatch(setAvatarDB(image));
 
-  const handleChangeProfile = async () => {
+  // change profile
+  const handleChangeProfile = () => {
     if (!name.trim()) setError("Name is empty");
     else if (!email.trim()) setError("Email is empty");
 

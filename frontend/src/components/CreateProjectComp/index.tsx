@@ -1,6 +1,6 @@
-import { Button, Checkbox, FormControlLabel, TextField } from "@mui/material";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import { Button, Checkbox, FormControlLabel, TextField } from "@mui/material";
 import { addProjectDB } from "../../store/projects/actions";
 import "./styles.scss";
 
@@ -16,6 +16,7 @@ export const CreateProjectComp: React.FC = () => {
   const handleChangeDescription = (e: React.ChangeEvent<HTMLInputElement>) =>
     setDescription(e.target.value);
 
+  // create new project
   const handleCreateProject = () => {
     if (!name.trim()) {
       return setError("Name is empty");
