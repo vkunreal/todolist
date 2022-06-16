@@ -22,11 +22,11 @@ Login
 Returns User
 
 | Body |
-|:-------------:|
-| Name | | Type |
-|:-----:| |:-----:|
-| email | | String |
-| password | | String |
+|-------------|
+| Name | Type |
+| --- | --- |
+| email | String |
+| password | String |
 
 ### POST `/auth/registration`
 
