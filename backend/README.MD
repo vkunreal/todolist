@@ -21,10 +21,10 @@ Server would open on adress [http://localhost:5000](http://localhost:5000).
 Login
 Returns User
 
-Body:
-
-> email - String
-> password - String
+| Body |
+| Name | | Type |
+| email | | String |
+| password | | String |
 
 ### POST `/auth/registration`
 
