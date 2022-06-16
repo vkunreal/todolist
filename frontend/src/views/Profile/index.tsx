@@ -10,7 +10,6 @@ import {
   selectSelectedUser,
 } from "../../store/profile/selectors";
 import {
-  setAvatarDB,
   setSelectedUserDB,
   updateAvatarDB,
   updateProfileDB,

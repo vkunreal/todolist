@@ -31,7 +31,8 @@ export const Project: React.FC<IProjectProps> = React.memo(
         <div onClick={openProject}>
           <h1 className="project-heading">{name}</h1>
 
-          <p className="project-description">{description}</p>
+          <div className="project-description">{description}</div>
+
           <p className="project-lastUpdate">
             Updated {getDate(last_update)} ago
           </p>
